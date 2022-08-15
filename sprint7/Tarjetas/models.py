@@ -17,7 +17,7 @@ class Marcatarjeta(models.Model):
 class Tarjeta(models.Model):
     # Field name made lowercase.
     numerotarjeta = models.AutoField(
-        db_column='NumeroTarjeta', primary_key=True)
+        db_column='NumeroTarjeta', primary_key=True, blank=True)
     # Field name made lowercase.
     cvv = models.IntegerField(db_column='CVV', blank=True, null=True)
     fecha_de_otorgamiento = models.DateField()

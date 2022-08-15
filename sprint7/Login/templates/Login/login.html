@@ -18,39 +18,45 @@
 		<div class="container">
 			<div class="forms-container">
 				<div class="signin-signup">
-					<form action="#" class="sign-in-form">
+					<form method="post" class="sign-in-form">
+						{% csrf_token %}
 						<h2 class="title">Iniciar sesión</h2>
 						<div class="input-field">
 							<i class="fas fa-user"></i>
-							<input type="text" placeholder="Usuario" />
+							<input name="username" type="text" placeholder="Usuario" />
 						</div>
 						<div class="input-field">
 							<i class="fas fa-lock"></i>
-							<input type="password" placeholder="Contraseña" />
+							<input name="password" type="password" placeholder="Contraseña" />
 						</div>
-						<a href="{% url 'dashboard' %}">
-							<input type="button" value="Ingresar" class="btn solid" />
-						</a>
+						<input type="submit" value="Ingresar" class="btn solid" />
 						<p class="social-text">
 							<a href="Error404.html" class="social-text"
 								>Olvidaste tu contraseña?</a
 							>
 						</p>
-						<div class="social-media"></div>
+						{% if error %}
+						<p style="color: red; font-weight: bold">{{error}}</p>
+						{% endif %}
 					</form>
-					<form action="#" class="sign-up-form">
+					<form method="post" class="sign-up-form">
+						{% csrf_token %}
 						<h2 class="title">Crear cuenta</h2>
 						<div class="input-field">
 							<i class="fas fa-user"></i>
-							<input type="text" placeholder="Usuario" />
+							<input name="customer_id" type="text" placeholder="Customer ID" />
+						</div>
+						<div class="input-field">
+							<i class="fas fa-user"></i>
+							<input name="username" type="text" placeholder="Usuario" />
 						</div>
 						<div class="input-field">
 							<i class="fas fa-envelope"></i>
-							<input type="email" placeholder="Email" />
+							<input name="email" type="email" placeholder="Email" />
 						</div>
 						<div class="input-field">
 							<i class="fas fa-lock"></i>
-							<input type="password" placeholder="Contraseña" />
+							<input name="password" type="password" placeholder="Contraseña" />
 						</div>
 						<input type="submit" class="btn" value="Crear cuenta" />
 						<a href="Error404.html" class="social-text">Necesitas ayuda?</a>
