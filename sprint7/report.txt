@@ -1,0 +1,1 @@
+customer_id,balance,loan_total,balance + loan,loan_type,loan_date

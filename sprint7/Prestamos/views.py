@@ -22,13 +22,22 @@ def validation(request, username):
                 loan_date=request.POST['start-date']
             )
             prestamo.save()
-
+            report(username, prestamo)
             context['cuenta'].balance += prestamo.loan_total
             context['cuenta'].save()
             context['message'] = 'Prestamo realizado con exito'
             context['color'] = 'success'
+
             return render(request, 'HomeBanking/dashboard.html', context)
         else:
             context['message'] = 'El monto debe ser mayor a 0'
             context['color'] = 'danger'
             return render(request, 'HomeBanking/dashboard.html', context)
+
+
+def report(username, prestamo):
+    # write a file with data when a loan is created with the customer_id, loan_total, loan_type and loan_date
+    context = create_context(username)
+    with open('report.txt', 'a') as file:
+        file.write(
+            f'{context["cliente"].customer_id}, {context["cuenta"].balance}, {prestamo.loan_total}, {context["cuenta"].balance + prestamo.loan_total}, {prestamo.loan_type}, {prestamo.loan_date}\n')
